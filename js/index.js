@@ -1,13 +1,14 @@
 (async function () {
+  //数据请求
   const $axios = axios.create({
-    baseURL: "http://47.92.27.233:8889",
+    baseURL: "https://mock.mengxuegu.com/mock/638ee70893a67b5f1066944e/example",
   });
-  let oneData = await $axios.get("/one/data");
-  let twoData = await $axios.get("/two/data");
-  let threeData = await $axios.get("/three/data");
-  let fourData = await $axios.get("/four/data");
-  let mapData = await $axios.get("/china/data");
-
+  let oneData = await $axios.get("/api/one/data");
+  let twoData = await $axios.get("/api/two/data");
+  let threeData = await $axios.get("/api/three/data");
+  let fourData = await $axios.get("/api/four/data");
+  let mapData = await $axios.get("/api/china/data");
+  //dom元素
   let doms = {
     items: document.querySelectorAll(".content"),
     map: document.querySelector(".map"),
@@ -25,8 +26,8 @@
     myChart.setOption(option);
   }
   //柱状图
-  let dataX1 = oneData.data.chartData.chartData.map((item) => item.title);
-  let data1 = oneData.data.chartData.chartData.map((item) => item.num);
+  let dataX1 = oneData.data.data.chartData.map((item) => item.title);
+  let data1 = oneData.data.data.chartData.map((item) => item.num);
   let option1 = {
     grid: {
       top: "3%",
@@ -92,8 +93,8 @@
   };
   show(doms.items[0], option1);
   //折线图
-  let dataX2 = twoData.data.chartTwo.chartData.day;
-  let data2 = Object.values(twoData.data.chartTwo.chartData.num);
+  let dataX2 = twoData.data.data.chartData.day;
+  let data2 = Object.values(twoData.data.data.chartData.num);
   let option2 = {
     grid: {
       left: "1%",
@@ -263,7 +264,7 @@
   };
   show(doms.items[1], option2);
   //饼状图
-  let data3 = threeData.data.chartThree.chartData;
+  let data3 = threeData.data.data.chartData;
   let option3 = {
     tooltip: {
       trigger: "item",
@@ -287,7 +288,7 @@
   show(doms.items[2], option3);
   //柱状图
   let dataX4 = dataX2;
-  let data4 = Object.values(fourData.data.chartFour.chartData.num);
+  let data4 = Object.values(fourData.data.data.chartData.num);
   let option4 = {
     grid: {
       top: "3%",
@@ -387,7 +388,7 @@
   };
   show(doms.items[3], option4);
   //地图
-  let data5 = mapData.data.chinaData;
+  let data5 = mapData.data.data.data;
   echarts.registerMap("china", data5);
   let option5 = {
     grid: {
